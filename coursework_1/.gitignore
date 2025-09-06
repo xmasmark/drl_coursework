@@ -2,3 +2,12 @@
 .venv/
 venv/
 ENV/
+# Ignore Unity environment executables & data
+Banana_Windows_x86_64/
+Banana_Windows_x86/
+Banana_Linux/
+Banana_Mac/
+*.exe
+*.dll
+*.x86_64
+*.app

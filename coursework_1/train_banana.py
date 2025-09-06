@@ -6,7 +6,12 @@ from dqn_agent import Agent
 
 # 1. Load Unity env (adjust filename if different)
 # env = UnityEnvironment(file_name="Banana_Windows_x86_64/Banana.exe")
-env = UnityEnvironment(file_name="Banana.exe")
+# env = UnityEnvironment(file_name="Banana.exe")
+
+from pathlib import Path
+exe = Path(__file__).with_name("Banana_Windows_x86_64") / "Banana.exe"  # adjust if needed
+env = UnityEnvironment(file_name=str(exe), no_graphics=True, worker_id=1, base_port=5005)
+
 
 # 2. Get default brain and sizes
 brain_name = env.brain_names[0]
