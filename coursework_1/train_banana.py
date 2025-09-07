@@ -21,8 +21,12 @@ env_info = env.reset(train_mode=True)[brain_name]
 state_size = len(env_info.vector_observations[0])  # should be 37
 action_size = brain.vector_action_space_size      # should be 4
 
-# agent = Agent(state_size=state_size, action_size=action_size, seed=0)
-agent = Agent(state_dim=state_size, action_dim=action_size)
+# # agent = Agent(state_size=state_size, action_size=action_size, seed=0)
+# agent = Agent(state_dim=state_size, action_dim=action_size)
+
+# old Udacity style (now supported too): Agent(state_size=state_size, action_size=action_size, seed=0)
+agent = Agent(state_dim=state_size, action_dim=action_size, seed=0)
+
 
 # 3. Training loop
 def dqn(n_episodes=2000, max_t=1000, eps_start=1.0, eps_end=0.01, eps_decay=0.995):
@@ -53,7 +57,8 @@ def dqn(n_episodes=2000, max_t=1000, eps_start=1.0, eps_end=0.01, eps_decay=0.99
             print(f'\rEpisode {i_episode}\tAverage Score: {np.mean(scores_window[-100:]):.2f}')
         if np.mean(scores_window[-100:]) >= 13.0:
             print(f"\nEnvironment solved in {i_episode} episodes!\tAverage Score: {np.mean(scores_window[-100:]):.2f}")
-            torch.save(agent.qnetwork_local.state_dict(), "checkpoint.pth")
+            # torch.save(agent.qnetwork_local.state_dict(), "checkpoint.pth")
+            torch.save(agent.q.state_dict(), "checkpoint.pth")
             break
     return scores
 
