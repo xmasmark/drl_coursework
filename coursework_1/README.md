@@ -27,6 +27,9 @@ My implementation solved the environment in **673 episodes**, significantly fast
 git clone https://github.com/xmasmark/drl_coursework.git
 cd drl_coursework/coursework_1
 
+into this folder, a new folder needs to be placed and named Banana_Windows_x86_64
+there, the unity environment needs to be downloaded and accessed by the application
+
 ### 1. Clone this repository
 ## Download the Banana environment and place it in the folder called Banana_Windows_x86_64
 
