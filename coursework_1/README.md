@@ -22,7 +22,21 @@ My implementation solved the environment in **673 episodes**, significantly fast
 
 ## Getting Started
 
-### 1. Clone this repository
+### Clone this repository
 ```bash
-git clone https://github.com/your-username/drl_coursework.git
+git clone https://github.com/xmasmark/drl_coursework.git
 cd drl_coursework/coursework_1
+
+### 1. Clone this repository
+## Download the Banana environment and place it in the folder called Banana_Windows_x86_64
+
+python -m venv .venv
+.\.venv\Scripts\activate   # Windows
+# source .venv/bin/activate   # Linux/Mac
+
+pip install --no-deps -r requirements.txt
+
+#Finally run the code:
+
+python train_banana.py
+
