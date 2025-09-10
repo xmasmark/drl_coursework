@@ -27,6 +27,9 @@ My implementation solved the environment in **673 episodes**, significantly fast
 git clone https://github.com/xmasmark/drl_coursework.git
 cd drl_coursework/coursework_1
 
+into this folder, a new folder needs to be placed and named Banana_Windows_x86_64
+there, the unity environment needs to be downloaded and accessed by the application
+
 ### 1. Clone this repository
 ## Download the Banana environment and place it in the folder called Banana_Windows_x86_64
 
@@ -39,4 +42,6 @@ pip install --no-deps -r requirements.txt
 #Finally run the code:
 
 python train_banana.py
+
+The code contained was run with an old i7 processor without the usage of GPU. The run took between 15 and 20 minutes.
 
