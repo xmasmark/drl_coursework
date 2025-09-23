@@ -59,10 +59,54 @@ class Agent:
     """
     DDPG Agent for single-agent Reacher.
     """
+    # def __init__(self, state_size, action_size, random_seed=2,
+    #              actor_lr=1e-4, critic_lr=1e-3, weight_decay=1e-2,
+    #              gamma=0.99, tau=1e-3, batch_size=128, buffer_size=int(1e6),
+    #              start_learn_after=5000, updates_per_step=1, noise_sigma=0.2):
+    #     self.state_size  = state_size
+    #     self.action_size = action_size
+    #     self.gamma = gamma
+    #     self.tau = tau
+    #     self.batch_size = batch_size
+    #     self.updates_per_step = updates_per_step
+    #     self.start_learn_after = start_learn_after
+
+    #     torch.manual_seed(random_seed)
+    #     np.random.seed(random_seed)
+    #     random.seed(random_seed)
+
+    #     # Actor
+    #     self.actor_local  = Actor(state_size, action_size, seed=random_seed).to(DEVICE)
+    #     self.actor_target = Actor(state_size, action_size, seed=random_seed).to(DEVICE)
+    #     self.actor_optimizer = optim.Adam(self.actor_local.parameters(), lr=actor_lr)
+
+    #     # Critic
+    #     self.critic_local  = Critic(state_size, action_size, seed=random_seed).to(DEVICE)
+    #     self.critic_target = Critic(state_size, action_size, seed=random_seed).to(DEVICE)
+    #     self.critic_optimizer = optim.Adam(self.critic_local.parameters(),
+    #                                        lr=critic_lr, weight_decay=weight_decay)
+
+    #     # Initialize target = local
+    #     self.hard_update(self.actor_target, self.actor_local)
+    #     self.hard_update(self.critic_target, self.critic_local)
+
+    #     # Replay buffer & noise
+    #     self.memory = ReplayBuffer(action_size, buffer_size=buffer_size, batch_size=batch_size, seed=random_seed)
+    #     self.noise = OUNoise(action_size, seed=random_seed, sigma=noise_sigma)
+
+
     def __init__(self, state_size, action_size, random_seed=2,
-                 actor_lr=1e-4, critic_lr=1e-3, weight_decay=1e-2,
-                 gamma=0.99, tau=1e-3, batch_size=128, buffer_size=int(1e6),
-                 start_learn_after=5000, updates_per_step=1, noise_sigma=0.2):
+                 # === Tuned defaults ===
+                 actor_lr=5e-5,             # ↓ was 1e-4
+                 critic_lr=1e-3,
+                 weight_decay=1e-2,
+                 gamma=0.99,
+                 tau=1e-3,
+                 batch_size=256,            # ↑ was 128
+                 buffer_size=int(1e6),
+                 start_learn_after=10000,   # ↑ gives more diverse buffer before learning
+                 updates_per_step=1,
+                 noise_sigma=0.15):         # ↓ was 0.2
         self.state_size  = state_size
         self.action_size = action_size
         self.gamma = gamma
