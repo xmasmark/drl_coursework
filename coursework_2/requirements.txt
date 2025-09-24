@@ -1,0 +1,5 @@
+numpy
+torch
+matplotlib
+pandas
+unityagents==0.4.0
