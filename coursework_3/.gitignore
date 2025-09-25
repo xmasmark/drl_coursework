@@ -1,0 +1,17 @@
+# Unity environments
+coursework_2/envs/
+*.exe
+*.dll
+*.app
+*.x86*
+*.x86_64*
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Checkpoints and logs
+*.pth
+*.csv
+
+venv/
