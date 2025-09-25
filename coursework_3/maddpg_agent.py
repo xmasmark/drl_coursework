@@ -52,7 +52,9 @@ class Agent:
         self.actor_local.train()
         if add_noise:
             action = np.clip(action + self.noise.sample(), -1, 1)
-        return action
+        # return action
+        return action.astype(np.float32)
+
 
     def reset(self):
         self.noise.reset()

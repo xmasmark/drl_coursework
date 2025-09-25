@@ -15,6 +15,7 @@ SEED = 1
 np.random.seed(SEED)
 torch.manual_seed(SEED)
 
+WARMUP_EPISODES = 200
 
 def train(n_episodes=3000, max_t=1000, print_every=50, target_score=0.5):
     # Make sure checkpoints/ exists
@@ -44,15 +45,23 @@ def train(n_episodes=3000, max_t=1000, print_every=50, target_score=0.5):
 
         # OU noise sigma decay: 0.20 -> 0.05 over first 500 episodes
         if hasattr(maddpg, "set_noise_sigma"):
-            frac = min(1.0, (i_episode - 1) / 500.0)
-            sigma = 0.20 * (1.0 - frac) + 0.05 * frac
+            frac = min(1.0, (i_episode - 1) / 1000.0)
+            sigma = 0.30 * (1.0 - frac) + 0.05 * frac
             maddpg.set_noise_sigma(sigma)
 
         maddpg.reset()
         scores = np.zeros(n_agents)
 
         for t in range(max_t):
-            actions = maddpg.act(states, add_noise=True)  # (n_agents, action_size) in [-1,1]
+
+            actions = maddpg.act(states, add_noise=True).astype(np.float32)  # (n_agents, action_size) in [-1,1]
+            if i_episode <= WARMUP_EPISODES:
+                actions = np.random.uniform(-1, 1, size=(n_agents, action_size)).astype(np.float32)
+            else:
+                actions = maddpg.act(states, add_noise=True).astype(np.float32)
+
+            # env_info = env.step(actions)[brain_name]
+
             env_info = env.step(actions)[brain_name]
             next_states = env_info.vector_observations
             rewards = env_info.rewards               # list len n_agents
